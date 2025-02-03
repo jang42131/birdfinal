@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday</title>
+    <style>
+        body {
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f5f5f5;
+            cursor: pointer; /* 클릭 유도 */
+        }
+        #mapImage, #birthdayImage {
+            max-width: 90%;
+            max-height: 90%;
+            position: absolute;
+            display: none; /* 처음에는 숨기기 */
+        }
+        #mapImage {
+            display: block; /* 기본적으로 맵 이미지 보이기 */
+        }
+    </style>
+</head>
+<body onclick="toggleImage()">
+    <!-- 맵 이미지 -->
+    <img id="mapImage" src="map.jpg" alt="Map">
+    
+    <!-- 생일 이미지 -->
+    <img id="birthdayImage" src="happybirthday.gif" alt="Happy Birthday">
+    
+    <script>
+        function toggleImage() {
+            const mapImage = document.getElementById('mapImage');
+            const birthdayImage = document.getElementById('birthdayImage');
+            
+            // 이미지가 보이면 다른 이미지로 전환
+            if (mapImage.style.display === 'block') {
+                mapImage.style.display = 'none'; // 맵 이미지 숨기기
+                birthdayImage.style.display = 'block'; // 생일 이미지 보이기
+            } else {
+                birthdayImage.style.display = 'none'; // 생일 이미지 숨기기
+                mapImage.style.display = 'block'; // 맵 이미지 보이기
+            }
+        }
+    </script>
+</body>
+</html>

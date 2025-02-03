@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>편지</title>
+    <style>
+        body { margin: 0; overflow: hidden; text-align: center; font-family: Arial, sans-serif; }
+        .container { position: relative; width: 100vw; height: 100vh; }
+        .background {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+        .message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            font-size: 1.5em;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" onclick="showMessage()">
+        <img src="letter.jpg" class="background" alt="편지">
+        <div id="message" class="message"></div>
+    </div>
+    <script>
+        const text = [
+            "혁신적인 길200-1", 
+            "10F-12F", 
+            "추신. 힌트는 카톡으로"
+        ];
+
+        function showMessage() {
+            const messageDiv = document.getElementById('message');
+            messageDiv.style.display = 'block';
+            messageDiv.innerHTML = "";
+            let index = 0;
+            let lineIndex = 0;
+
+            function typeText() {
+                if (lineIndex < text.length) {
+                    if (index < text[lineIndex].length) {
+                        messageDiv.innerHTML += text[lineIndex][index];
+                        index++;
+                        setTimeout(typeText, 100);
+                    } else {
+                        messageDiv.innerHTML += "<br>";
+                        index = 0;
+                        lineIndex++;
+                        setTimeout(typeText, 500);
+                    }
+                }
+            }
+            typeText();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+img {
+    transform: scale(1.5); /* 이미지를 1.5배 확대 */
+}
+
+body {
+  font-family: "Yeon Sung", serif;
+  font-weight: 400;
+  font-style: normal;
+  margin: 0;
+  padding: 0;
+}
+
+.yeon-sung-regular {
+  font-family: "Yeon Sung", serif;
+  font-weight: 400;
+  font-style: normal;
+}

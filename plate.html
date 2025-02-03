@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Party Place</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        .container {
+            margin: 50px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 2em;
+            color: #333;
+        }
+        .question {
+            margin-bottom: 20px;
+            font-size: 1.2em;
+        }
+        label {
+            font-size: 1.1em;
+            margin-right: 20px;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #4CAF50;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1.2em;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .home-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .home-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>생일 밥상</h1>
+        <form id="foodSurveyForm">
+            <!-- 1. 오늘의 기분 -->
+            <div class="question">
+                <label>1. 오늘의 기분은?</label><br>
+                <label><input type="radio" name="mood" value="초록색"> 초록색</label>
+                <label><input type="radio" name="mood" value="노랑색"> 노랑색</label>
+                <label><input type="radio" name="mood" value="빨강색"> 빨강색</label>
+                <label><input type="radio" name="mood" value="검은색"> 검은색</label>
+            </div>
+
+            <!-- 2. 싫어하지만, 굳이 술을 마신다면 -->
+            <div class="question">
+                <label>2. 싫어하지만, 굳이 술을 마신다면?</label><br>
+                <label><input type="radio" name="alcohol" value="맥주"> 맥주</label>
+                <label><input type="radio" name="alcohol" value="소주"> 소주</label>
+                <label><input type="radio" name="alcohol" value="누룩티"> 누룩티</label>
+                <label><input type="radio" name="alcohol" value="기타"> 그 외</label>
+            </div>
+
+            <!-- 3. 처음이자 마지막 29살 생일, 선택할 식단은? -->
+            <div class="question">
+                <label>3. 처음이자 마지막 29살 생일, 선택할 식단은?</label><br>
+                <label><input type="radio" name="meal" value="밥"> 밥</label>
+                <label><input type="radio" name="meal" value="연어회"> 연어회</label>
+                <label><input type="radio" name="meal" value="피자"> 피자</label>
+                <label><input type="radio" name="meal" value="타코"> 타코</label>
+            </div>
+
+            <button type="button" onclick="showRecommendation()">추천 음식점 보기</button>
+        </form>
+
+        <div class="result" id="result"></div>
+
+        <!-- 홈으로 돌아가기 버튼 -->
+        <button class="home-button" onclick="goHome()">홈으로 돌아가기</button>
+    </div>
+
+    <script>
+        function showRecommendation() {
+            const form = document.getElementById('foodSurveyForm');
+            const mood = form.querySelector('input[name="mood"]:checked');
+            const alcohol = form.querySelector('input[name="alcohol"]:checked');
+            const meal = form.querySelector('input[name="meal"]:checked');
+
+            if (mood && alcohol && meal) {
+                let recommendation = "";
+
+                // 기분에 따른 음식점 추천
+                if (mood.value === "초록색") {
+                    if (meal.value === "밥") {
+                        recommendation = "추천 음식점: 명륜미술관";
+                    } else if (meal.value === "연어회") {
+                        recommendation = "추천 음식점: 젠다이닝";
+                    } else {
+                        recommendation = "추천 음식점: 낙원탭룸";
+                    }
+                } else if (mood.value === "노랑색") {
+                    if (meal.value === "피자") {
+                        recommendation = "추천 음식점: 낙원탭룸";
+                    } else {
+                        recommendation = "추천 음식점: 젠다이닝";
+                    }
+                } else if (mood.value === "빨강색") {
+                    recommendation = "추천 음식점: 타코의 집";
+                } else if (mood.value === "검은색") {
+                    if (alcohol.value === "누룩티") {
+                        recommendation = "추천 음식점: 명륜미술관";
+                    } else {
+                        recommendation = "추천 음식점: 젠다이닝";
+                    }
+                }
+
+                document.getElementById('result').textContent = recommendation;
+            } else {
+                document.getElementById('result').textContent = "모든 질문에 답변해 주세요!";
+            }
+        }
+
+        function goHome() {
+            // 홈 페이지로 이동
+            window.location.href = 'index.html'; // 홈 페이지로 이동할 링크
+        }
+    </script>
+</body>
+</html>
