@@ -38,7 +38,8 @@
             cursor: pointer;
         }
 
-          #cat {
+        /* 고양이 이미지 */
+        #cat {
             position: absolute;
             top: 40%;
             left: 80%;
@@ -47,7 +48,6 @@
             cursor: pointer;
         }
 
-        
         /* 편지 이미지 - 왼쪽 하단 */
         #letter {
             position: absolute;
@@ -68,7 +68,7 @@
         <img id="present" src="present.png" alt="선물">
         <img id="dinner" src="dinner.png" alt="저녁 접시">
         <img id="letter" src="letter.png" alt="편지">
-        <img id="cat" src="cat.png" alt="cat">
+        <img id="cat" src="cat.png" alt="고양이">
     </div>
 
     <script>
@@ -86,11 +86,10 @@
 
         document.getElementById('letter').addEventListener('click', function() {
             window.location.href = 'letter.html';
-            
-      document.getElementById('cat').addEventListener('click', function() {
+        });
+
+        document.getElementById('cat').addEventListener('click', function() {
             window.location.href = 'cat.html';
-            
-            
         });
     </script>
 </body>
