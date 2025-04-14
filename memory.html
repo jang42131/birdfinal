@@ -1,27 +1,83 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Memory</title>
-    <style>
-        body {
-            margin: 0;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background: black;
-        }
-        .background {
-            width: 100vw;
-            height: 100vh;
-            object-fit: cover;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Memory</title>
+    
+     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Sankofa+Display&family=Song+Myung&family=Yeon+Sung&display=swap" rel="stylesheet" />
+    
+<style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: black;
+      color: antiquewhite;
+        font-family: 'Playfair Dispaly', serif;
+      font-size: 1.5rem;
+      flex-direction: column;
+    }
+
+    .background {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    #textDisplay {
+      white-space: pre-wrap;
+      text-align: center;
+      padding: 20px;
+    }
+  </style>
 </head>
 <body>
-    <img src="collect.PNG" class="background" alt="Memory Background">
+
+  <img src="collect.PNG" class="background" alt="Memory Background" />
+
+  <div id="textDisplay"></div>
+
+  <script>
+    const textLines = [
+      "Shall I compare thee to a summer’s day?\n그대를 한여름의 하루에 비할 수 있을까?",
+      "So long as men can breathe or eyes can see,\n사람이 숨 쉬고 눈으로 볼 수 있는 한,",
+      "So long lives this, and this gives life to thee.\n이 시는 살아 있고, 그대는 그 안에서 영원히 살아 있으리라."
+    ];
+
+    const display = document.getElementById("textDisplay");
+    let currentLine = 0;
+    let charIndex = 0;
+
+    function typeLine() {
+      if (currentLine < textLines.length) {
+        const line = textLines[currentLine];
+        if (charIndex < line.length) {
+          display.textContent += line[charIndex];
+          charIndex++;
+          setTimeout(typeLine, 100); // 글자 사이 시간
+        } else {
+          display.textContent += "\n\n"; // 줄바꿈
+          currentLine++;
+          charIndex = 0;
+          setTimeout(typeLine, 800); // 문장 간 시간
+        }
+      } else {
+        setTimeout(() => {
+          window.location.href = "diary.html";
+        }, 1000); // 다 끝나고 1초 후 이동
+      }
+    }
+
+    setTimeout(() => {
+      typeLine();
+    }, 3000); // 3초 대기 후 시작
+  </script>
 </body>
 </html>
