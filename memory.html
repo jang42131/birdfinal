@@ -68,20 +68,37 @@
     const display = document.getElementById("textDisplay");
     let currentPair = 0;
 
+    // 한 글자씩 타이핑하는 함수
+    function typeText(text, lineElement, callback) {
+      let index = 0;
+      function type() {
+        if (index < text.length) {
+          lineElement.textContent += text[index];
+          index++;
+          setTimeout(type, 100); // 타이핑 속도 조정 (100ms 간격)
+        } else {
+          callback(); // 타이핑 끝나면 콜백 함수 실행
+        }
+      }
+      type();
+    }
+
+    // 각 문장을 처리하는 함수
     function showLine(lineIndex = 0) {
       if (currentPair < textPairs.length) {
         const pair = textPairs[currentPair];
         const line = document.createElement('div');
         line.className = 'line';
-        line.textContent = pair[lineIndex];
         display.appendChild(line);
 
-        if (lineIndex === 0) {
-          setTimeout(() => showLine(1), 1500); // 첫 줄 후 1.5초 후 다음 줄
-        } else {
-          currentPair++;
-          setTimeout(() => showLine(0), 2500); // 다음 쌍은 2.5초 후
-        }
+        typeText(pair[lineIndex], line, () => {
+          if (lineIndex === 0) {
+            setTimeout(() => showLine(1), 1500); // 첫 줄 후 1.5초 후 다음 줄
+          } else {
+            currentPair++;
+            setTimeout(() => showLine(0), 2500); // 다음 쌍은 2.5초 후
+          }
+        });
       } else {
         setTimeout(() => {
           window.location.href = "diary.html";
