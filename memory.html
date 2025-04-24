@@ -4,11 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Memory</title>
-    
-  <!-- 구글 폰트 불러오기 (Yeon Sung, Playfair Display) -->
+
+  <!-- 폰트 -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Yeon+Sung&family=Playfair+Display&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Yeon+Sung&display=swap" rel="stylesheet">
 
   <style>
     body {
@@ -20,75 +20,79 @@
       height: 100vh;
       background: black;
       color: antiquewhite;
-      font-family: 'Playfair Display', serif; /* ✅ 폰트 이름 정확히 수정 */
+      font-family: 'Yeon Sung', serif;
       font-size: 1.5rem;
       flex-direction: column;
     }
 
     .background {
       position: absolute;
-      top: 0;
-      left: 0;
+      top: 0; left: 0;
       width: 100vw;
       height: 100vh;
       object-fit: cover;
       z-index: -1;
     }
 
-    <style>
-  /* ...기존 스타일 생략... */
-  #textDisplay {
-    white-space: pre-wrap;
-    text-align: center;
-    padding: 20px;
-    max-width: 90vw;
-    word-break: keep-all;
-    line-height: 1.6;
-    font-size: clamp(1rem, 4vw, 1.5rem);
-  }
-</style>
+    #textDisplay {
+      text-align: center;
+      padding: 20px;
+    }
 
+    .line {
+      margin: 10px 0;
+    }
+  </style>
 </head>
 <body>
 
   <img src="collect.PNG" class="background" alt="Memory Background" />
-
   <div id="textDisplay"></div>
 
   <script>
-    const textLines = [
-      "Shall I compare thee to a summer’s day?\n그대를 한여름의 하루에 비할 수 있을까?",
-      "So long as men can breathe or eyes can see,\n사람이 숨 쉬고 눈으로 볼 수 있는 한,",
-      "So long lives this, and this gives life to thee.\n이 시는 살아 있고, 그대는 그 안에서 영원히 살아 있으리라."
+    const textPairs = [
+      [
+        "Shall I compare thee to a summer’s day?",
+        "그대를 한여름의 하루에 비할 수 있을까?"
+      ],
+      [
+        "So long as men can breathe or eyes can see,",
+        "사람이 숨 쉬고 눈으로 볼 수 있는 한,"
+      ],
+      [
+        "So long lives this, and this gives life to thee.",
+        "이 시는 살아 있고, 그대는 그 안에서 영원히 살아 있으리라."
+      ]
     ];
 
     const display = document.getElementById("textDisplay");
-    let currentLine = 0;
-    let charIndex = 0;
+    let currentPair = 0;
 
-    function typeLine() {
-      if (currentLine < textLines.length) {
-        const line = textLines[currentLine];
-        if (charIndex < line.length) {
-          display.textContent += line[charIndex];
-          charIndex++;
-          setTimeout(typeLine, 100); // 글자 사이 시간
+    function showLine(lineIndex = 0) {
+      if (currentPair < textPairs.length) {
+        const pair = textPairs[currentPair];
+        const line = document.createElement('div');
+        line.className = 'line';
+        line.textContent = pair[lineIndex];
+        display.appendChild(line);
+
+        if (lineIndex === 0) {
+          setTimeout(() => showLine(1), 1500); // 첫 줄 후 1.5초 후 다음 줄
         } else {
-          display.textContent += "\n\n"; // 줄바꿈
-          currentLine++;
-          charIndex = 0;
-          setTimeout(typeLine, 800); // 문장 간 시간
+          currentPair++;
+          setTimeout(() => showLine(0), 2500); // 다음 쌍은 2.5초 후
         }
       } else {
         setTimeout(() => {
           window.location.href = "diary.html";
-        }, 1000); // 다 끝나고 1초 후 이동
+        }, 1500);
       }
     }
 
     setTimeout(() => {
-      typeLine();
-    }, 3000); // 3초 대기 후 시작
+      showLine(0);
+    }, 3000); // 첫 시작 3초 대기
   </script>
+
 </body>
 </html>
