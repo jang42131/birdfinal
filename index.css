@@ -31,7 +31,7 @@ body {
 
 /* 텍스트 디스플레이 줄바꿈 처리 */
 #textDisplay {
-  white-space: pre-wrap;
+  white-space: nowrap;
   text-align: center;
   padding: 20px;
 }
