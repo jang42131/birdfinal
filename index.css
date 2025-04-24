@@ -1,17 +1,37 @@
+/* 이미지 확대 */
 img {
-    transform: scale(1.5); /* 이미지를 1.5배 확대 */
+  transform: scale(1.5);
 }
 
+/* 기본 배경 및 폰트 설정 */
 body {
-  font-family: "Yeon Sung", serif;
+  font-family: 'Yeon Sung', serif;
   font-weight: 400;
   font-style: normal;
   margin: 0;
   padding: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  color: antiquewhite;
+  font-size: 1.5rem;
+  flex-direction: column;
 }
 
+/* 예비 클래스 (사용 중이라면 유지) */
 .yeon-sung-regular {
-  font-family: "Yeon Sung", serif;
+  font-family: 'Yeon Sung', serif;
   font-weight: 400;
   font-style: normal;
+}
+
+
+/* 텍스트 디스플레이 줄바꿈 처리 */
+#textDisplay {
+  white-space: pre-wrap;
+  text-align: center;
+  padding: 20px;
 }
